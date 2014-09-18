@@ -3,6 +3,12 @@ Image Processing
 
 **Image processing experiment using python** The program takes a word and searches for 40 images related to it using Google's API. It the takes 1000 pixels from each image (random positions) and generates a new image based on those.
 
+####Video Demo
+
+[![thumb.png](/week3/imageProcessing/thumb.png)](https://www.youtube.com/watch?v=KpD7MqYX5Ew)
+
+####Contents
+
 On the project you will find 3 .py files:
 
 **main.py** --> is the mainn script, it is the one that has to be run. Basically this script calls and executes the function of the class **googleImg** that I wrote in a separate file, just to keep it clean.
