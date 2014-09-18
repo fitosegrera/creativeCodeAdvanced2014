@@ -7,6 +7,8 @@ Image Processing
 
 [![thumb.png](/week3/imageProcessing/thumb.png)](https://www.youtube.com/watch?v=KpD7MqYX5Ew)
 
+Click on the image to watch the video
+
 ####Contents
 
 On the project you will find 3 .py files:
