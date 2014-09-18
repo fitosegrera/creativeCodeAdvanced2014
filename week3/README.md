@@ -4,10 +4,9 @@ Image Processing
 **Image processing experiment using python** The program takes a word and searches for 40 images related to it using Google's API. It the takes 1000 pixels from each image (random positions) and generates a new image based on those.
 
 ####Video Demo
-
+*Click on the image to watch the video*
 [![thumb.png](/week3/imageProcessing/thumb.png)](https://www.youtube.com/watch?v=KpD7MqYX5Ew)
-
-Click on the image to watch the video
+*Click on the image to watch the video*
 
 ####Contents
 
