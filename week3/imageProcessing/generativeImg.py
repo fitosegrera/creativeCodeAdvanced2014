@@ -12,7 +12,7 @@ class generativeImg:
     countY = 0
     savePosX = 0
     savePosY = 0
-    pixRange = 2500
+    pixRange = 1500
 
     size = (500,200)
     newIm = Image.new('RGB', size, (0,0,0)) # create the image

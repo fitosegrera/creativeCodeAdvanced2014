@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script src="js/three.min.js"></script>
+  <script src="js/ConvexGeometry.js"></script>
+  <script src="js/Detector.js"></script>
+  <script src="js/stats.min.js"></script>
+  <style type="text/css">
+  body {
+      font-family: Monospace;
+      background-color: #000;
+      margin: 0px;
+      overflow: hidden;
+  }
+  #map {
+    width: 20%;
+    height: 200px;
+    border: 1px solid #000;
+    position:absolute;
+    top: 0px;
+    right:0px;
+    z-index: 2;
+  }
+  #pano{
+    position: absolute;
+    z-index: -1;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div id="lat"></div>
+  <div id="lng"></div>
+  <div id="pano" style="position:absolute; left:0px; top: 8px; width: 100%; height: 100%;"></div>
+  <script>
+  var alienState = true;
+      if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+      function renderAlien(lat, lon){
+        var container, stats;
+        var camera, scene, renderer;
+        init();
+        animate();
+        function init() {
+          container = document.createElement( 'div' );
+          document.body.appendChild(container);
+          camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+          camera.position.y = 10;
+          scene = new THREE.Scene();
+          var light, object, materials;
+          scene.add( new THREE.AmbientLight( 0x404040 ) );
+          light = new THREE.DirectionalLight( 0xffffff );
+          light.position.set( 0, 1, 0 );
+          light.castShadow = true;
+          scene.add( light );
+          THREE.ImageUtils.crossOrigin = '';
+          var map = THREE.ImageUtils.loadTexture( 'http://maps.googleapis.com/maps/api/streetview?size=600x300&location='+lat+','+lon+'&heading=151.78&pitch=-0.76&sensor=false' );
+          map.wrapS = map.wrapT = THREE.RepeatWrapping;http://maps.googleapis.com/maps/api/streetview?size=400x400&location=40.720032,%20-73.988354&fov=90&heading=235&pitch=10&sensor=false
+          map.anisotropy = 16;
+          materials = [
+            new THREE.MeshLambertMaterial( { ambient: 0xbbbbbb, map: map } ),
+            new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false, transparent: true, opacity: 0.1 } )
+          ];
+          /////////////////////////////////////////////////
+          ///////////////// random convex /////////////////
+          /////////////////////////////////////////////////
+          points = [];
+          for ( var i = 0; i < 300; i ++ ) {
+            points.push( randomPointInSphere(300));
+          }
+          object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(points), materials);
+          object.position.set( -200, 0, 200 );
+          scene.add(object);
+          renderer = new THREE.WebGLRenderer( { antialias: true, alpha:true } );
+          renderer.setSize( window.innerWidth, window.innerHeight );
+          container.appendChild( renderer.domElement );
+          /////////////////////////////////////////////////
+          /////////////////////////////////////////////////
+          window.addEventListener( 'resize', onWindowResize, false );
+        }
+        function onWindowResize() {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize( window.innerWidth, window.innerHeight );
+        }
+        function randomPointInSphere( radius ) {
+          return new THREE.Vector3(
+            Math.random() * 500,
+            Math.random() * 500,
+            Math.random() * 500
+          );
+        }
+        function animate() {
+          requestAnimationFrame(animate);
+          //if(alienState){
+            render();
+          //}else{
+            //document.getElementById("container").remove();
+          //}
+        }
+        function render() {
+          var timer = Date.now() * 0.00001;
+          camera.position.x = 0;
+          camera.position.y = 10;
+          camera.position.z = 1200;
+          camera.lookAt(scene.position);
+          for ( var i = 0, l = scene.children.length; i < l; i ++ ) {
+            var object = scene.children[i];
+            object.rotation.x = timer * 1;
+            object.rotation.y = timer * 2.5;
+          }
+          renderer.render( scene, camera );
+        }
+      }
+    </script>
+</body>
+</html>
