@@ -4,7 +4,7 @@
         var mapDiv = document.getElementById('map');
         
         // Creating a latLng for the center of the map
-        var latlng = new google.maps.LatLng(57.414936, -6.726326999999969);
+        var latlng = new google.maps.LatLng(57.722286, -7.1532869999999775);
     
         // Creating an object literal containing the properties 
         // we want to pass to the map  
@@ -15,7 +15,7 @@
         };
         // Creating the map
         var map = new google.maps.Map(mapDiv, options);
-        var fenway = new google.maps.LatLng(57.414936, -6.726326999999969);
+        var fenway = new google.maps.LatLng(57.722286, -7.1532869999999775);
                 var mapOptions = {
                     center: fenway,
                     zoom: 14
