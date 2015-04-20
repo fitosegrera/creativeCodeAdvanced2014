@@ -9,7 +9,7 @@
 from time import sleep
 import serial
 
-class pyduino:
+class Pyduino:
 	def connect(self):
 		ser = serial.Serial('/dev/ttyATH0', 9600) #Establish the connection on a speci
 
